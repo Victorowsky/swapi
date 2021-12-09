@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
 
-interface MovieProps {}
+// interface MovieProps {}
 
 const Movie = () => {
 	return <Box>Movie info</Box>;
