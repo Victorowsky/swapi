@@ -16,7 +16,7 @@ const Home: React.FC<HomeProps> = () => {
 	let currentComponent: JSX.Element;
 
 	switch (category) {
-		case "people":
+		case "characters":
 			currentComponent = <PeopleView />;
 			break;
 		case "planets":

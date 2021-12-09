@@ -34,21 +34,9 @@ const Person: React.FC<PersonProps> = ({ data }) => {
 	const { name } = data;
 
 	return (
-		<Link style={classes.link} to={`/person/${name}`}>
+		<Link style={classes.link} to={`/character/${name}`}>
 			<Paper sx={classes.paper}>
 				<Typography variant="h5">{name}</Typography>
-
-				{/* <Typography>Year of birth: {birth_year}</Typography>
-
-				<Typography>Height: {height}cm</Typography>
-
-				<Typography>Gender: {gender}</Typography>
-
-				<Typography>Played in {films.length} movies</Typography>
-
-				<Typography>Has {vehicles.length} vehicles</Typography>
-
-				<Typography>Has {starships.length} starships</Typography> */}
 			</Paper>
 		</Link>
 	);

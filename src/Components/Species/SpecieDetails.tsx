@@ -99,7 +99,7 @@ const SpecieDetails: React.FC<SpecieDetailsProps> = () => {
 		(character: PeopleResultsArray) => {
 			const { name } = character;
 			return (
-				<Link key={name} style={classes.link} to={`/person/${name}`}>
+				<Link key={name} style={classes.link} to={`/character/${name}`}>
 					<Typography sx={classes.typographyLink}> - {name} </Typography>
 				</Link>
 			);

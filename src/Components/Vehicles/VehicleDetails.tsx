@@ -92,7 +92,7 @@ const VehicleDetails: React.FC<VehicleDetailsProps> = () => {
 	const renderPilots = findPilots.map((pilot: PeopleResultsArray) => {
 		const { name } = pilot;
 		return (
-			<Link key={name} style={classes.link} to={`/person/${name}`}>
+			<Link key={name} style={classes.link} to={`/character/${name}`}>
 				<Typography sx={classes.typographyLink}> - {name} </Typography>
 			</Link>
 		);

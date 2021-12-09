@@ -74,7 +74,7 @@ function App() {
 				<Header />
 				<Routes>
 					<Route path="/" element={<Home />} />
-					<Route path="/person/:personName" element={<PersonDetails />} />
+					<Route path="/character/:personName" element={<PersonDetails />} />
 					<Route path="/movie/:movieTitle" element={<FilmDetails />} />
 					<Route path="/planet/:planetName" element={<PlanetDetails />} />
 					<Route path="/specie/:specieName" element={<SpecieDetails />} />

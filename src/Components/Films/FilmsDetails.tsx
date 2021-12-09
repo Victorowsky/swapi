@@ -95,7 +95,7 @@ const FilmDetails: React.FC<FilmDetailsProps> = () => {
 		(character: PeopleResultsArray) => {
 			const { name } = character;
 			return (
-				<Link key={name} style={classes.link} to={`/person/${name}`}>
+				<Link key={name} style={classes.link} to={`/character/${name}`}>
 					<Typography sx={classes.typographyLink}> - {name} </Typography>
 				</Link>
 			);

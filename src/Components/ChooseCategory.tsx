@@ -45,7 +45,9 @@ const ChooseCategory: React.FC = () => {
 	return (
 		<Box sx={classes.box}>
 			<ButtonGroup sx={classes.buttonGroup}>
-				<Button onClick={() => handleChooseCategory("people")}>People</Button>
+				<Button onClick={() => handleChooseCategory("characters")}>
+					Characters
+				</Button>
 				<Button onClick={() => handleChooseCategory("planets")}>Planets</Button>
 				<Button onClick={() => handleChooseCategory("films")}>Films</Button>
 				<Button onClick={() => handleChooseCategory("species")}>Species</Button>
