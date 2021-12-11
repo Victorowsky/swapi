@@ -30,12 +30,15 @@ const classes = {
 };
 
 const Vehicle: React.FC<VehicleProps> = ({ data }) => {
-	const { name } = data;
+	const { name, pilots, cost_in_credits, length } = data;
 
 	return (
 		<Link to={`/vehicle/${name}`} style={classes.link}>
 			<Paper sx={classes.paper}>
 				<Typography variant="h5">{name}</Typography>
+				<Typography>Length: {length}m</Typography>
+				<Typography>Pilots: {pilots.length}</Typography>
+				<Typography>Cost: {cost_in_credits}</Typography>
 			</Paper>
 		</Link>
 	);

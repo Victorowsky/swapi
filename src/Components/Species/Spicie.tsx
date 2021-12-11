@@ -30,12 +30,15 @@ const classes = {
 };
 
 const Specie: React.FC<SpecieProps> = ({ data }) => {
-	const { name } = data;
+	const { name, average_height, eye_colors, hair_colors } = data;
 
 	return (
 		<Link to={`/specie/${name}`} style={classes.link}>
 			<Paper sx={classes.paper}>
 				<Typography variant="h5"> {name}</Typography>
+				<Typography> Average height: {average_height}cm</Typography>
+				<Typography> Eye colors: {eye_colors}</Typography>
+				<Typography> Hair colors: {hair_colors}</Typography>
 			</Paper>
 		</Link>
 	);

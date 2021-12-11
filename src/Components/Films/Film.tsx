@@ -30,14 +30,14 @@ const classes = {
 };
 
 const Film: React.FC<FilmProps> = ({ data }) => {
-	const { title } = data;
+	const { title, release_date, director } = data;
 
 	return (
 		<Link to={`/movie/${title}`} style={classes.link}>
 			<Paper sx={classes.paper}>
 				<Typography variant="h5"> {title}</Typography>
-				{/* <Typography>Release date: {release_date}</Typography>
-				<Typography>Directed by: {director}</Typography> */}
+				<Typography>Release date: {release_date}</Typography>
+				<Typography>Directed by: {director}</Typography>
 			</Paper>
 		</Link>
 	);

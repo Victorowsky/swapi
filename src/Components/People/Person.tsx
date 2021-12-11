@@ -31,12 +31,16 @@ const classes = {
 };
 
 const Person: React.FC<PersonProps> = ({ data }) => {
-	const { name } = data;
+	const { name, birth_year, films, vehicles, starships } = data;
 
 	return (
 		<Link style={classes.link} to={`/character/${name}`}>
 			<Paper sx={classes.paper}>
 				<Typography variant="h5">{name}</Typography>
+				<Typography>Year of birth: {birth_year}</Typography>
+				<Typography>Performed in {films.length} movies</Typography>
+				<Typography>Has {vehicles.length} vehicles</Typography>
+				<Typography>Has {starships.length} starships</Typography>
 			</Paper>
 		</Link>
 	);

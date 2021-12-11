@@ -30,14 +30,17 @@ const classes = {
 };
 
 const Planet: React.FC<PlanetProps> = ({ data }) => {
-	const { name } = data;
-
+	const { name, films, population, gravity, climate } = data;
 	return (
 		<Link style={classes.link} to={`/planet/${name}`}>
 			<Paper sx={classes.paper}>
 				<Typography variant="h5" align="center">
 					{name}
 				</Typography>
+				<Typography>Population: {population}</Typography>
+				<Typography>Gravity: {gravity}</Typography>
+				<Typography>Climate: {climate}</Typography>
+				<Typography>In {films.length} movies</Typography>
 			</Paper>
 		</Link>
 	);

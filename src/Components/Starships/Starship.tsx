@@ -30,7 +30,7 @@ const classes = {
 };
 
 const Starship: React.FC<StarshipProps> = ({ data }) => {
-	const { name } = data;
+	const { name, length, cost_in_credits, pilots } = data;
 
 	return (
 		<Link to={`/starship/${name}`} style={classes.link}>
@@ -38,6 +38,9 @@ const Starship: React.FC<StarshipProps> = ({ data }) => {
 				<Typography variant="h5" align="center">
 					{name}
 				</Typography>
+				<Typography>Length: {length}m</Typography>
+				<Typography>Pilots: {pilots.length}</Typography>
+				<Typography>Cost: {cost_in_credits}</Typography>
 			</Paper>
 		</Link>
 	);

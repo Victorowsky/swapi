@@ -91,7 +91,7 @@ const PlanetDetails: React.FC<PlanetDetailsProps> = () => {
 	const renderFilms = findFilms.map((film: FilmsResultsArray) => {
 		const { title } = film;
 		return (
-			<Link key={title} style={classes.link} to={`/film/${title}`}>
+			<Link key={title} style={classes.link} to={`/movie/${title}`}>
 				<Typography sx={classes.typographyLink}> - {title} </Typography>
 			</Link>
 		);
@@ -132,18 +132,22 @@ const PlanetDetails: React.FC<PlanetDetailsProps> = () => {
 				<Typography>Terrain: {terrain}</Typography>
 				<Typography>Water surface: {surface_water}</Typography>
 			</Paper>
-			<Paper sx={classes.paper}>
-				<Typography variant="h4" align="center">
-					Films
-				</Typography>
-				{renderFilms}
-			</Paper>
-			<Paper sx={classes.paper}>
-				<Typography variant="h4" align="center">
-					Residents
-				</Typography>
-				{renderResidents}
-			</Paper>
+			{Boolean(currentPlanet.films.length) && (
+				<Paper sx={classes.paper}>
+					<Typography variant="h4" align="center">
+						Films
+					</Typography>
+					{renderFilms}
+				</Paper>
+			)}
+			{Boolean(currentPlanet.residents.length) && (
+				<Paper sx={classes.paper}>
+					<Typography variant="h4" align="center">
+						Residents
+					</Typography>
+					{renderResidents}
+				</Paper>
+			)}
 		</Box>
 	);
 };
