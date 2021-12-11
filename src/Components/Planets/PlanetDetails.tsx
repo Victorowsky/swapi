@@ -135,7 +135,7 @@ const PlanetDetails: React.FC<PlanetDetailsProps> = () => {
 			{Boolean(currentPlanet.films.length) && (
 				<Paper sx={classes.paper}>
 					<Typography variant="h4" align="center">
-						Films
+						Movies
 					</Typography>
 					{renderFilms}
 				</Paper>
