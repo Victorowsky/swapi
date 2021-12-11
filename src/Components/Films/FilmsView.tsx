@@ -1,4 +1,4 @@
-import { Box, TextField } from "@mui/material";
+import { Box, SxProps, TextField, Theme } from "@mui/material";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { FilmsResultsArray } from "../../api";
@@ -8,12 +8,12 @@ import Film from "./Film";
 
 interface FilmsViewProps {}
 
-const classes = {
+const classes: SxProps<Theme> = {
 	FilmsView: {
 		display: "flex",
 		width: "100%",
 		gap: "15px",
-		"flex-wrap": "wrap",
+		flexWrap: "wrap",
 		justifyContent: "center",
 	},
 };

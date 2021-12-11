@@ -1,4 +1,11 @@
-import { Box, Paper, Skeleton, Typography } from "@mui/material";
+import {
+	Box,
+	Paper,
+	Skeleton,
+	SxProps,
+	Theme,
+	Typography,
+} from "@mui/material";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { PeopleResultsArray, StarshipsResultsArray } from "../../api";
@@ -8,14 +15,7 @@ import { Link } from "react-router-dom";
 
 interface StarshipDetailsProps {}
 
-const classes = {
-	link: {
-		textDecoration: "none",
-		color: "inherit",
-		"&:hover": {
-			fontWeight: 700,
-		},
-	},
+const classes: SxProps<Theme> | any = {
 	typographyLink: {
 		"&:hover": {
 			fontWeight: 700,
@@ -26,14 +26,14 @@ const classes = {
 		width: "100%",
 		minHeight: "340px",
 		borderRadius: "3px",
-		"flex-wrap": "wrap",
-		"flex-direction": "column",
+		flexWrap: "wrap",
+		flexDirection: "column",
 		gap: "15px",
 		alignItems: "center",
 	},
 	paper: {
 		display: "flex",
-		"flex-direction": "column",
+		flexDirection: "column",
 		backgroundColor: "#121212",
 		padding: "15px 30px",
 		borderRadius: "3px",

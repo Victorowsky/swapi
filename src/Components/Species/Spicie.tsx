@@ -1,4 +1,4 @@
-import { Paper, Typography } from "@mui/material";
+import { Paper, SxProps, Theme, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import { SpeciesResultsArray } from "../../api";
 
@@ -6,18 +6,13 @@ interface SpecieProps {
 	data: SpeciesResultsArray;
 }
 
-const classes = {
-	link: {
-		textDecoration: "none",
-		width: "98%",
-		maxWidth: "400px",
-	},
+const classes: SxProps<Theme> = {
 	paper: {
 		maxWidth: "400px",
 		width: "100%",
 		height: "250px",
 		display: "flex",
-		"flex-direction": "column",
+		flexDirection: "column",
 		alignItems: "center",
 		gap: "15px",
 		justifyContent: "center",
@@ -33,7 +28,14 @@ const Specie: React.FC<SpecieProps> = ({ data }) => {
 	const { name, average_height, eye_colors, hair_colors } = data;
 
 	return (
-		<Link to={`/specie/${name}`} style={classes.link}>
+		<Link
+			to={`/specie/${name}`}
+			style={{
+				textDecoration: "none",
+				width: "98%",
+				maxWidth: "400px",
+			}}
+		>
 			<Paper sx={classes.paper}>
 				<Typography variant="h5"> {name}</Typography>
 				<Typography> Average height: {average_height}cm</Typography>

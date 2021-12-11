@@ -1,4 +1,4 @@
-import { Box, TextField } from "@mui/material";
+import { Box, SxProps, TextField, Theme } from "@mui/material";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { PeopleResultsArray } from "../../api";
@@ -8,12 +8,12 @@ import Skeletons from "../Skeletons";
 
 interface PeopleViewProps {}
 
-const classes = {
+const classes: SxProps<Theme> = {
 	peopleView: {
 		display: "flex",
 		width: "100%",
 		gap: "15px",
-		"flex-wrap": "wrap",
+		flexWrap: "wrap",
 		justifyContent: "center",
 	},
 };

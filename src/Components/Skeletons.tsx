@@ -4,7 +4,7 @@ interface SkeletonsProps {
 	amount: number;
 }
 
-const classes = {
+const classes: any = {
 	skeleton: {
 		borderRadius: "5px",
 	},

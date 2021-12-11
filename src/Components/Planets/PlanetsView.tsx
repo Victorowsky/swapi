@@ -1,4 +1,4 @@
-import { Box, TextField } from "@mui/material";
+import { Box, SxProps, TextField, Theme } from "@mui/material";
 import { useSelector } from "react-redux";
 import { PlanetsResultsArray } from "../../api";
 import { RootState } from "../../app/store";
@@ -8,12 +8,12 @@ import { useState } from "react";
 
 interface PlanetsViewProps {}
 
-const classes = {
+const classes: SxProps<Theme> = {
 	planetsView: {
 		display: "flex",
 		width: "100%",
 		gap: "15px",
-		"flex-wrap": "wrap",
+		flexWrap: "wrap",
 		justifyContent: "center",
 	},
 };

@@ -1,5 +1,5 @@
 import { ThemeProvider } from "@emotion/react";
-import { Box, createTheme } from "@mui/material";
+import { Box, createTheme, SxProps, Theme } from "@mui/material";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Route, Routes } from "react-router";
@@ -34,11 +34,11 @@ const theme = createTheme({
 	},
 });
 
-const classes = {
+const classes: SxProps<Theme> | any = {
 	app: {
 		width: "100%",
 		display: "flex",
-		"flex-direction": "column",
+		flexDirection: "column",
 		alignItems: "center",
 		gap: "15px",
 	},

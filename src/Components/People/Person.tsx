@@ -1,4 +1,4 @@
-import { Paper, Typography } from "@mui/material";
+import { Paper, SxProps, Theme, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import { PeopleResultsArray } from "../../api";
 
@@ -6,7 +6,7 @@ interface PersonProps {
 	data: PeopleResultsArray;
 }
 
-const classes = {
+const classes: SxProps<Theme> | any = {
 	link: {
 		textDecoration: "none",
 		width: "98%",
@@ -17,7 +17,7 @@ const classes = {
 		width: "100%",
 		minHeight: "250px",
 		display: "flex",
-		"flex-direction": "column",
+		flexDirection: "column",
 		alignItems: "center",
 		gap: "15px",
 		padding: "15px",

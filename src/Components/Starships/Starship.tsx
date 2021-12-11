@@ -1,4 +1,4 @@
-import { Paper, Typography } from "@mui/material";
+import { Paper, SxProps, Theme, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import { StarshipsResultsArray } from "../../api";
 
@@ -6,18 +6,13 @@ interface StarshipProps {
 	data: StarshipsResultsArray;
 }
 
-const classes = {
-	link: {
-		textDecoration: "none",
-		width: "98%",
-		maxWidth: "400px",
-	},
+const classes: SxProps<Theme> = {
 	paper: {
 		maxWidth: "400px",
 		width: "100%",
 		height: "250px",
 		display: "flex",
-		"flex-direction": "column",
+		flexDirection: "column",
 		alignItems: "center",
 		gap: "15px",
 		justifyContent: "center",
@@ -33,7 +28,14 @@ const Starship: React.FC<StarshipProps> = ({ data }) => {
 	const { name, length, cost_in_credits, pilots } = data;
 
 	return (
-		<Link to={`/starship/${name}`} style={classes.link}>
+		<Link
+			to={`/starship/${name}`}
+			style={{
+				textDecoration: "none",
+				width: "98%",
+				maxWidth: "400px",
+			}}
+		>
 			<Paper sx={classes.paper}>
 				<Typography variant="h5" align="center">
 					{name}
