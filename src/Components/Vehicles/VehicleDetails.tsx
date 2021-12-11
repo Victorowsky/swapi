@@ -78,7 +78,7 @@ const VehicleDetails: React.FC<VehicleDetailsProps> = () => {
 	);
 
 	if (!currentVehicle) {
-		return <Box>Taki pojazd nie istnieje</Box>;
+		return <Box>Vehicle doesn't exist</Box>;
 	}
 
 	const findFilms = films.filter((film: FilmsResultsArray) =>

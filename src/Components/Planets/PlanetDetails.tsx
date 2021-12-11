@@ -78,7 +78,7 @@ const PlanetDetails: React.FC<PlanetDetailsProps> = () => {
 	);
 
 	if (!currentPlanet) {
-		return <Box>Taka planeta nie istnieje</Box>;
+		return <Box>Planet doesn't exist</Box>;
 	}
 
 	const findFilms = films?.filter((film: FilmsResultsArray) =>

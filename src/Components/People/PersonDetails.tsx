@@ -79,7 +79,7 @@ const PersonDetails: React.FC<PersonDetailsProps> = () => {
 	);
 
 	if (!currentPerson) {
-		return <Box>Taka postac nie istnieje</Box>;
+		return <Box>Character doesn't exist</Box>;
 	}
 
 	const {
