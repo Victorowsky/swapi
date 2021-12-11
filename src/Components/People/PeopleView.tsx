@@ -31,7 +31,7 @@ const PeopleView: React.FC<PeopleViewProps> = () => {
 		);
 	}
 
-	let filteredArray = people.filter((person) =>
+	const filteredArray = people.filter((person) =>
 		person.name.match(new RegExp(searchValue, "gi"))
 	);
 

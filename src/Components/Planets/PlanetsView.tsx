@@ -4,6 +4,7 @@ import { PlanetsResultsArray } from "../../api";
 import { RootState } from "../../app/store";
 import Planet from "./Planet";
 import Skeletons from "../Skeletons";
+import { useState } from "react";
 
 interface PlanetsViewProps {}
 
@@ -19,6 +20,8 @@ const classes = {
 const PlanetsView: React.FC<PlanetsViewProps> = () => {
 	const { planets } = useSelector((state: RootState) => state.api);
 
+	const [searchValue, setSearchValue] = useState("");
+
 	if (!planets.length)
 		return (
 			<Box sx={classes.planetsView}>
@@ -26,7 +29,11 @@ const PlanetsView: React.FC<PlanetsViewProps> = () => {
 			</Box>
 		);
 
-	const renderPlanets: JSX.Element[] = planets?.map(
+	const filteredArray = planets.filter((person) =>
+		person.name.match(new RegExp(searchValue, "gi"))
+	);
+
+	const renderPlanets: JSX.Element[] = filteredArray?.map(
 		(planet: PlanetsResultsArray) => {
 			return <Planet key={planet.name} data={planet} />;
 		}
@@ -34,7 +41,12 @@ const PlanetsView: React.FC<PlanetsViewProps> = () => {
 
 	return (
 		<>
-			<TextField variant="outlined" placeholder={"Search planet by name"} />
+			<TextField
+				variant="outlined"
+				placeholder={"Search planet by name"}
+				value={searchValue}
+				onChange={(e) => setSearchValue(e.target.value)}
+			/>
 			<Box sx={classes.planetsView}>{renderPlanets}</Box>
 		</>
 	);
