@@ -149,12 +149,6 @@ export interface Vehicle {
 	results: VehiclesResultsArray[];
 }
 
-export const getData = (category: string, page: number = 1): Promise<any> => {
-	return fetch(`https://swapi.dev/api/${category}/?page=${page}`).then((res) =>
-		res.json()
-	);
-};
-
 export const getFilms = (page: number = 1): Promise<Films> => {
 	return fetch(`https://swapi.dev/api/films/?page=${page}`).then((res) =>
 		res.json()
