@@ -16,6 +16,13 @@ import { Link } from "react-router-dom";
 interface StarshipDetailsProps {}
 
 const classes: SxProps<Theme> | any = {
+	link: {
+		textDecoration: "none",
+		color: "inherit",
+		"&:hover": {
+			fontWeight: 700,
+		},
+	},
 	typographyLink: {
 		"&:hover": {
 			fontWeight: 700,
