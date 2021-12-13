@@ -1,10 +1,10 @@
-import { Skeleton } from "@mui/material";
+import { Skeleton, SxProps, Theme } from "@mui/material";
 
 interface SkeletonsProps {
 	amount: number;
 }
 
-const classes: any = {
+const classes: SxProps<Theme> = {
 	skeleton: {
 		borderRadius: "5px",
 	},
