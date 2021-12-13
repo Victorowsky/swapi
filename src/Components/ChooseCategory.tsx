@@ -70,7 +70,7 @@ const ChooseCategory: React.FC = () => {
 					label="Category"
 					onChange={(e) => handleChooseCategory(e.target.value)}
 				>
-					<MenuItem value={"people"}>People</MenuItem>
+					<MenuItem value={"characters"}>Characters</MenuItem>
 					<MenuItem value={"films"}>Films</MenuItem>
 					<MenuItem value={"planets"}>Planets</MenuItem>
 					<MenuItem value={"species"}>Species</MenuItem>
