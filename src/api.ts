@@ -165,12 +165,13 @@ export const getAllFilms = async (): Promise<FilmsResultsArray[]> => {
 			apiPages = Math.ceil(res.count / 10);
 			filmsArray.push(...res.results);
 		})
-		.catch((err) => console.log(err));
+		.catch((err) => console.log("Fetch error :("));
 
 	while (counter <= apiPages) {
 		await getFilms(counter)
 			.then((res: Films) => filmsArray.push(...res.results))
-			.catch((err) => console.log(err));
+			.catch((err) => console.log("Fetch error :("));
+
 		counter++;
 	}
 	return filmsArray;
@@ -192,12 +193,13 @@ export const getAllPeople = async (): Promise<PeopleResultsArray[]> => {
 			apiPages = Math.ceil(res.count / 10);
 			peopleArray.push(...res.results);
 		})
-		.catch((err) => console.log(err));
+		.catch((err) => console.log("Fetch error :("));
 
 	while (counter <= apiPages) {
 		await getPeople(counter)
 			.then((res: People) => peopleArray.push(...res.results))
-			.catch((err) => console.log(err));
+			.catch((err) => console.log("Fetch error :("));
+
 		counter++;
 	}
 	return peopleArray;
@@ -219,11 +221,13 @@ export const getAllPlanets = async (): Promise<PlanetsResultsArray[]> => {
 			apiPages = Math.ceil(res.count / 10);
 			planetsArray.push(...res.results);
 		})
-		.catch((err) => console.log(err));
+		.catch((err) => console.log("Fetch error :("));
+
 	while (counter <= apiPages) {
 		await getPlanets(counter)
 			.then((res: Planets) => planetsArray.push(...res.results))
-			.catch((err) => console.log(err));
+			.catch((err) => console.log("Fetch error :("));
+
 		counter++;
 	}
 	return planetsArray;
@@ -245,12 +249,13 @@ export const getAllSpecies = async (): Promise<SpeciesResultsArray[]> => {
 			apiPages = Math.ceil(res.count / 10);
 			speciesArray.push(...res.results);
 		})
-		.catch((err) => console.log(err));
+		.catch((err) => console.log("Fetch error :("));
 
 	while (counter <= apiPages) {
 		await getSpecies(counter)
 			.then((res: Species) => speciesArray.push(...res.results))
-			.catch((err) => console.log(err));
+			.catch((err) => console.log("Fetch error :("));
+
 		counter++;
 	}
 	return speciesArray;
@@ -267,15 +272,18 @@ export const getAllStarships = async (): Promise<StarshipsResultsArray[]> => {
 	let counter: number = 2;
 	let starShipsArray: StarshipsResultsArray[] = [];
 
-	await getStarships().then((res: Starships) => {
-		apiPages = Math.ceil(res.count / 10);
-		starShipsArray.push(...res.results);
-	});
+	await getStarships()
+		.then((res: Starships) => {
+			apiPages = Math.ceil(res.count / 10);
+			starShipsArray.push(...res.results);
+		})
+		.catch((err) => console.log("Fetch error :("));
 
 	while (counter <= apiPages) {
 		await getStarships(counter)
 			.then((res: Starships) => starShipsArray.push(...res.results))
-			.catch((err) => console.log(err));
+			.catch((err) => console.log("Fetch error :("));
+
 		counter++;
 	}
 	return starShipsArray;
@@ -291,15 +299,17 @@ export const getAllVehicles = async (): Promise<VehiclesResultsArray[]> => {
 	let counter: number = 2;
 	let vehicleArray: VehiclesResultsArray[] = [];
 
-	await getVehicles().then((res: Vehicle) => {
-		apiPages = Math.ceil(res.count / 10);
-		vehicleArray.push(...res.results);
-	});
+	await getVehicles()
+		.then((res: Vehicle) => {
+			apiPages = Math.ceil(res.count / 10);
+			vehicleArray.push(...res.results);
+		})
+		.catch((err) => console.log("Fetch error :("));
 
 	while (counter <= apiPages) {
 		await getVehicles(counter)
 			.then((res: Vehicle) => vehicleArray.push(...res.results))
-			.catch((err) => console.log(err));
+			.catch((err) => console.log("Fetch error :("));
 		counter++;
 	}
 	return vehicleArray;
