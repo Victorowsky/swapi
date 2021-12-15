@@ -1,11 +1,4 @@
-import {
-	Box,
-	Paper,
-	Skeleton,
-	SxProps,
-	Theme,
-	Typography,
-} from "@mui/material";
+import { Box, Paper, Skeleton, Typography } from "@mui/material";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
@@ -15,52 +8,9 @@ import {
 	SpeciesResultsArray,
 } from "../../api";
 import { RootState } from "../../app/store";
+import { detailsClasses } from "../sharedClasses";
 
 interface SpecieDetailsProps {}
-
-const classes: SxProps<Theme> | any = {
-	link: {
-		textDecoration: "none",
-		color: "inherit",
-		"&:hover": {
-			fontWeight: 700,
-		},
-	},
-	typographyLink: {
-		"&:hover": {
-			fontWeight: 700,
-		},
-	},
-	box: {
-		display: "flex",
-		width: "100%",
-		minHeight: "340px",
-		borderRadius: "3px",
-		flexWrap: "wrap",
-		flexDirection: "column",
-		gap: "15px",
-		alignItems: "center",
-	},
-	paper: {
-		display: "flex",
-		flexDirection: "column",
-		backgroundColor: "#121212",
-		padding: "15px 30px",
-		borderRadius: "3px",
-		height: "fit-content",
-		gap: "5px",
-		minWidth: "360px",
-		width: "100%",
-		maxWidth: "800px",
-		minHeight: "300px",
-	},
-	skeleton: {
-		maxWidth: "800px",
-		width: "98%",
-		height: "340px",
-		borderRadius: "3px",
-	},
-};
 
 const SpecieDetails: React.FC<SpecieDetailsProps> = () => {
 	const { specieName } = useParams();
@@ -71,7 +21,11 @@ const SpecieDetails: React.FC<SpecieDetailsProps> = () => {
 
 	if (!species.length)
 		return (
-			<Skeleton animation="wave" variant="rectangular" sx={classes.skeleton} />
+			<Skeleton
+				animation="wave"
+				variant="rectangular"
+				sx={detailsClasses.skeleton}
+			/>
 		);
 
 	const currentSpecie = species.find(
@@ -96,8 +50,8 @@ const SpecieDetails: React.FC<SpecieDetailsProps> = () => {
 	const renderFilms = findFilms.map((film: FilmsResultsArray) => {
 		const { title } = film;
 		return (
-			<Link key={title} style={classes.link} to={`/movie/${title}`}>
-				<Typography sx={classes.typographyLink}> - {title} </Typography>
+			<Link key={title} style={detailsClasses.link} to={`/movie/${title}`}>
+				<Typography sx={detailsClasses.typographyLink}> - {title} </Typography>
 			</Link>
 		);
 	});
@@ -106,8 +60,8 @@ const SpecieDetails: React.FC<SpecieDetailsProps> = () => {
 		(character: PeopleResultsArray) => {
 			const { name } = character;
 			return (
-				<Link key={name} style={classes.link} to={`/character/${name}`}>
-					<Typography sx={classes.typographyLink}> - {name} </Typography>
+				<Link key={name} style={detailsClasses.link} to={`/character/${name}`}>
+					<Typography sx={detailsClasses.typographyLink}> - {name} </Typography>
 				</Link>
 			);
 		}
@@ -127,8 +81,8 @@ const SpecieDetails: React.FC<SpecieDetailsProps> = () => {
 	} = currentSpecie;
 
 	return (
-		<Box sx={classes.box}>
-			<Paper sx={classes.paper}>
+		<Box sx={detailsClasses.box}>
+			<Paper sx={detailsClasses.paper}>
 				<Typography align="center" variant="h4">
 					Information
 				</Typography>
@@ -143,13 +97,13 @@ const SpecieDetails: React.FC<SpecieDetailsProps> = () => {
 				{homeworld && <Typography>Homeworld: {hair_colors}</Typography>}
 				<Typography>Language: {language}</Typography>
 			</Paper>
-			<Paper sx={classes.paper}>
+			<Paper sx={detailsClasses.paper}>
 				<Typography align="center" variant="h4">
 					Movies
 				</Typography>
 				<Box>{renderFilms}</Box>
 			</Paper>
-			<Paper sx={classes.paper}>
+			<Paper sx={detailsClasses.paper}>
 				<Typography align="center" variant="h4">
 					Characters
 				</Typography>

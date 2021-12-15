@@ -1,11 +1,4 @@
-import {
-	Box,
-	Paper,
-	Skeleton,
-	SxProps,
-	Theme,
-	Typography,
-} from "@mui/material";
+import { Box, Paper, Skeleton, Typography } from "@mui/material";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
@@ -16,57 +9,9 @@ import {
 	VehiclesResultsArray,
 } from "../../api";
 import { RootState } from "../../app/store";
+import { detailsClasses } from "../sharedClasses";
 
 interface PersonDetailsProps {}
-
-const classes: SxProps<Theme> | any = {
-	link: {
-		textDecoration: "none",
-		color: "inherit",
-		"&:hover": {
-			fontWeight: 700,
-		},
-	},
-	typographyLink: {
-		display: "flex",
-		"&:hover": {
-			fontWeight: 700,
-		},
-	},
-	skeleton: {
-		maxWidth: "800px",
-		width: "98%",
-		height: "340px",
-		borderRadius: "3px",
-	},
-	box: {
-		display: "flex",
-		maxWidth: "1200px",
-		width: "98%",
-		minHeight: "340px",
-		borderRadius: "3px",
-		flexWrap: "wrap",
-		flexDirection: "column",
-		gap: "15px",
-		alignItems: "center",
-		"@media(max-width:500px)": {
-			width: "100%",
-		},
-	},
-	paper: {
-		display: "flex",
-		flexDirection: "column",
-		backgroundColor: "#121212",
-		padding: "15px 30px",
-		borderRadius: "3px",
-		height: "fit-content",
-		gap: "5px",
-		minWidth: "360px",
-		width: "100%",
-		maxWidth: "800px",
-		minHeight: "300px",
-	},
-};
 
 const PersonDetails: React.FC<PersonDetailsProps> = () => {
 	const { personName } = useParams();
@@ -77,7 +22,11 @@ const PersonDetails: React.FC<PersonDetailsProps> = () => {
 
 	if (!people.length) {
 		return (
-			<Skeleton variant="rectangular" animation="wave" sx={classes.skeleton} />
+			<Skeleton
+				variant="rectangular"
+				animation="wave"
+				sx={detailsClasses.skeleton}
+			/>
 		);
 	}
 
@@ -123,8 +72,8 @@ const PersonDetails: React.FC<PersonDetailsProps> = () => {
 		(vehicle: VehiclesResultsArray) => {
 			const { name } = vehicle;
 			return (
-				<Link key={name} style={classes.link} to={`/vehicle/${name}`}>
-					<Typography sx={classes.typographyLink} key={name}>
+				<Link key={name} style={detailsClasses.link} to={`/vehicle/${name}`}>
+					<Typography sx={detailsClasses.typographyLink} key={name}>
 						- {name}
 					</Typography>
 				</Link>
@@ -135,8 +84,8 @@ const PersonDetails: React.FC<PersonDetailsProps> = () => {
 	const renderMovies = performedMovies.map((movie: FilmsResultsArray) => {
 		const { title, release_date } = movie;
 		return (
-			<Link key={title} style={classes.link} to={`/movie/${title}`}>
-				<Typography sx={classes.typographyLink} key={title}>
+			<Link key={title} style={detailsClasses.link} to={`/movie/${title}`}>
+				<Typography sx={detailsClasses.typographyLink} key={title}>
 					- {title} ({release_date}){" "}
 				</Typography>
 			</Link>
@@ -147,8 +96,8 @@ const PersonDetails: React.FC<PersonDetailsProps> = () => {
 		(starship: StarshipsResultsArray) => {
 			const { name } = starship;
 			return (
-				<Link key={name} style={classes.link} to={`/starship/${name}`}>
-					<Typography sx={classes.typographyLink} key={name}>
+				<Link key={name} style={detailsClasses.link} to={`/starship/${name}`}>
+					<Typography sx={detailsClasses.typographyLink} key={name}>
 						- {name}
 					</Typography>
 				</Link>
@@ -157,8 +106,8 @@ const PersonDetails: React.FC<PersonDetailsProps> = () => {
 	);
 
 	return (
-		<Box sx={classes.box}>
-			<Paper sx={classes.paper}>
+		<Box sx={detailsClasses.box}>
+			<Paper sx={detailsClasses.paper}>
 				<Typography align="center" variant="h4">
 					Person details
 				</Typography>
@@ -169,7 +118,7 @@ const PersonDetails: React.FC<PersonDetailsProps> = () => {
 				<Typography>Skin color: {skin_color}</Typography>
 				<Typography>
 					Homeworld:
-					<Link style={classes.link} to={`/planet/${findHomeworld}`}>
+					<Link style={detailsClasses.link} to={`/planet/${findHomeworld}`}>
 						{findHomeworld}
 					</Link>
 				</Typography>
@@ -178,7 +127,7 @@ const PersonDetails: React.FC<PersonDetailsProps> = () => {
 				<Typography>Eye color: {eye_color}</Typography>
 			</Paper>
 
-			<Paper sx={classes.paper}>
+			<Paper sx={detailsClasses.paper}>
 				<Typography align="center" variant="h4">
 					Movies
 					{renderMovies}
@@ -186,7 +135,7 @@ const PersonDetails: React.FC<PersonDetailsProps> = () => {
 			</Paper>
 
 			{Boolean(currentPerson.vehicles.length) && (
-				<Paper sx={classes.paper}>
+				<Paper sx={detailsClasses.paper}>
 					<Typography align="center" variant="h4">
 						Vehicles
 						{renderPersonVehicles}
@@ -194,7 +143,7 @@ const PersonDetails: React.FC<PersonDetailsProps> = () => {
 				</Paper>
 			)}
 			{Boolean(currentPerson.starships.length) && (
-				<Paper sx={classes.paper}>
+				<Paper sx={detailsClasses.paper}>
 					<Typography align="center" variant="h4">
 						Starships
 						{renderPersonStarships}

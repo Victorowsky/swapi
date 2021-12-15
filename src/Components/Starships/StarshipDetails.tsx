@@ -1,63 +1,13 @@
-import {
-	Box,
-	Paper,
-	Skeleton,
-	SxProps,
-	Theme,
-	Typography,
-} from "@mui/material";
+import { Box, Paper, Skeleton, Typography } from "@mui/material";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { PeopleResultsArray, StarshipsResultsArray } from "../../api";
 import { RootState } from "../../app/store";
 import { FilmsResultsArray } from "../../api";
 import { Link } from "react-router-dom";
+import { detailsClasses } from "../sharedClasses";
 
 interface StarshipDetailsProps {}
-
-const classes: SxProps<Theme> | any = {
-	link: {
-		textDecoration: "none",
-		color: "inherit",
-		"&:hover": {
-			fontWeight: 700,
-		},
-	},
-	typographyLink: {
-		"&:hover": {
-			fontWeight: 700,
-		},
-	},
-	box: {
-		display: "flex",
-		width: "100%",
-		minHeight: "340px",
-		borderRadius: "3px",
-		flexWrap: "wrap",
-		flexDirection: "column",
-		gap: "15px",
-		alignItems: "center",
-	},
-	paper: {
-		display: "flex",
-		flexDirection: "column",
-		backgroundColor: "#121212",
-		padding: "15px 30px",
-		borderRadius: "3px",
-		height: "fit-content",
-		gap: "5px",
-		minWidth: "360px",
-		width: "100%",
-		maxWidth: "800px",
-		minHeight: "300px",
-	},
-	skeleton: {
-		maxWidth: "800px",
-		width: "98%",
-		height: "340px",
-		borderRadius: "3px",
-	},
-};
 
 const StarshipDetails: React.FC<StarshipDetailsProps> = () => {
 	const { starshipName } = useParams();
@@ -68,7 +18,11 @@ const StarshipDetails: React.FC<StarshipDetailsProps> = () => {
 
 	if (!starships.length)
 		return (
-			<Skeleton animation="wave" variant="rectangular" sx={classes.skeleton} />
+			<Skeleton
+				animation="wave"
+				variant="rectangular"
+				sx={detailsClasses.skeleton}
+			/>
 		);
 
 	const currentStarship = starships.find(
@@ -93,16 +47,16 @@ const StarshipDetails: React.FC<StarshipDetailsProps> = () => {
 	const renderFilms = findFilms.map((film: FilmsResultsArray) => {
 		const { title } = film;
 		return (
-			<Link key={title} style={classes.link} to={`/movie/${title}`}>
-				<Typography sx={classes.typographyLink}> - {title} </Typography>
+			<Link key={title} style={detailsClasses.link} to={`/movie/${title}`}>
+				<Typography sx={detailsClasses.typographyLink}> - {title} </Typography>
 			</Link>
 		);
 	});
 	const renderPilots = findPilots.map((pilot: PeopleResultsArray) => {
 		const { name } = pilot;
 		return (
-			<Link key={name} style={classes.link} to={`/character/${name}`}>
-				<Typography sx={classes.typographyLink}> - {name} </Typography>
+			<Link key={name} style={detailsClasses.link} to={`/character/${name}`}>
+				<Typography sx={detailsClasses.typographyLink}> - {name} </Typography>
 			</Link>
 		);
 	});
@@ -124,8 +78,8 @@ const StarshipDetails: React.FC<StarshipDetailsProps> = () => {
 	} = currentStarship;
 
 	return (
-		<Box sx={classes.box}>
-			<Paper sx={classes.paper}>
+		<Box sx={detailsClasses.box}>
+			<Paper sx={detailsClasses.paper}>
 				<Typography align="center" variant="h4">
 					Information
 				</Typography>
@@ -146,7 +100,7 @@ const StarshipDetails: React.FC<StarshipDetailsProps> = () => {
 				<Typography>Cost: {cost_in_credits}</Typography>
 			</Paper>
 			{currentStarship.films.length && (
-				<Paper sx={classes.paper}>
+				<Paper sx={detailsClasses.paper}>
 					<Typography align="center" variant="h4">
 						Movies
 					</Typography>
@@ -154,7 +108,7 @@ const StarshipDetails: React.FC<StarshipDetailsProps> = () => {
 				</Paper>
 			)}
 			{Boolean(currentStarship.pilots.length) && (
-				<Paper sx={classes.paper}>
+				<Paper sx={detailsClasses.paper}>
 					<Typography align="center" variant="h4">
 						Pilots
 					</Typography>

@@ -1,11 +1,4 @@
-import {
-	Box,
-	Paper,
-	Skeleton,
-	SxProps,
-	Theme,
-	Typography,
-} from "@mui/material";
+import { Box, Paper, Skeleton, Typography } from "@mui/material";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
@@ -15,57 +8,9 @@ import {
 	PlanetsResultsArray,
 } from "../../api";
 import { RootState } from "../../app/store";
+import { detailsClasses } from "../sharedClasses";
 
 interface PlanetDetailsProps {}
-
-const classes: SxProps<Theme> | any = {
-	link: {
-		textDecoration: "none",
-		color: "inherit",
-		"&:hover": {
-			fontWeight: 700,
-		},
-	},
-	typographyLink: {
-		display: "flex",
-		"&:hover": {
-			fontWeight: 700,
-		},
-	},
-	skeleton: {
-		maxWidth: "800px",
-		width: "98%",
-		height: "340px",
-		borderRadius: "3px",
-	},
-	box: {
-		display: "flex",
-		maxWidth: "1200px",
-		width: "98%",
-		minHeight: "340px",
-		borderRadius: "3px",
-		flexWrap: "wrap",
-		flexDirection: "column",
-		gap: "15px",
-		alignItems: "center",
-		"@media(max-width:500px)": {
-			width: "100%",
-		},
-	},
-	paper: {
-		display: "flex",
-		flexDirection: "column",
-		backgroundColor: "#121212",
-		padding: "15px 30px",
-		borderRadius: "3px",
-		height: "fit-content",
-		gap: "5px",
-		minWidth: "360px",
-		width: "100%",
-		maxWidth: "800px",
-		minHeight: "300px",
-	},
-};
 
 const PlanetDetails: React.FC<PlanetDetailsProps> = () => {
 	const { planets, films, people } = useSelector(
@@ -76,7 +21,11 @@ const PlanetDetails: React.FC<PlanetDetailsProps> = () => {
 
 	if (!planets.length) {
 		return (
-			<Skeleton variant="rectangular" animation="wave" sx={classes.skeleton} />
+			<Skeleton
+				variant="rectangular"
+				animation="wave"
+				sx={detailsClasses.skeleton}
+			/>
 		);
 	}
 
@@ -98,8 +47,8 @@ const PlanetDetails: React.FC<PlanetDetailsProps> = () => {
 	const renderFilms = findFilms.map((film: FilmsResultsArray) => {
 		const { title } = film;
 		return (
-			<Link key={title} style={classes.link} to={`/movie/${title}`}>
-				<Typography sx={classes.typographyLink}> - {title} </Typography>
+			<Link key={title} style={detailsClasses.link} to={`/movie/${title}`}>
+				<Typography sx={detailsClasses.typographyLink}> - {title} </Typography>
 			</Link>
 		);
 	});
@@ -107,8 +56,8 @@ const PlanetDetails: React.FC<PlanetDetailsProps> = () => {
 	const renderResidents = findResidents.map((resident: PeopleResultsArray) => {
 		const { name } = resident;
 		return (
-			<Link key={name} style={classes.link} to={`/character/${name}`}>
-				<Typography sx={classes.typographyLink}> - {name} </Typography>
+			<Link key={name} style={detailsClasses.link} to={`/character/${name}`}>
+				<Typography sx={detailsClasses.typographyLink}> - {name} </Typography>
 			</Link>
 		);
 	});
@@ -125,8 +74,8 @@ const PlanetDetails: React.FC<PlanetDetailsProps> = () => {
 	} = currentPlanet;
 
 	return (
-		<Box sx={classes.box}>
-			<Paper sx={classes.paper}>
+		<Box sx={detailsClasses.box}>
+			<Paper sx={detailsClasses.paper}>
 				<Typography variant="h4" align="center">
 					Information
 				</Typography>
@@ -140,7 +89,7 @@ const PlanetDetails: React.FC<PlanetDetailsProps> = () => {
 				<Typography>Water surface: {surface_water}</Typography>
 			</Paper>
 			{Boolean(currentPlanet.films.length) && (
-				<Paper sx={classes.paper}>
+				<Paper sx={detailsClasses.paper}>
 					<Typography variant="h4" align="center">
 						Movies
 					</Typography>
@@ -148,7 +97,7 @@ const PlanetDetails: React.FC<PlanetDetailsProps> = () => {
 				</Paper>
 			)}
 			{Boolean(currentPlanet.residents.length) && (
-				<Paper sx={classes.paper}>
+				<Paper sx={detailsClasses.paper}>
 					<Typography variant="h4" align="center">
 						Residents
 					</Typography>
