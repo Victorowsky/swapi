@@ -1,31 +1,21 @@
-import { Box, SxProps, TextField, Theme } from "@mui/material";
-import { useState } from "react";
+import { Box } from "@mui/material";
 import { useSelector } from "react-redux";
 import { VehiclesResultsArray } from "../../api";
 import { RootState } from "../../app/store";
+import { sharedClasses } from "../sharedClasses";
 import Skeletons from "../Skeletons";
 import Vehicle from "./Vehicle";
 
-interface VehiclesViewProps {}
+interface VehiclesViewProps {
+	searchValue: string;
+}
 
-const classes: SxProps<Theme> = {
-	VehicleView: {
-		display: "flex",
-		width: "100%",
-		gap: "15px",
-		flexWrap: "wrap",
-		justifyContent: "center",
-	},
-};
-
-const VehiclesView: React.FC<VehiclesViewProps> = () => {
+const VehiclesView: React.FC<VehiclesViewProps> = ({ searchValue }) => {
 	const { vehicles } = useSelector((state: RootState) => state.api);
-
-	const [searchValue, setSearchValue] = useState("");
 
 	if (!vehicles.length) {
 		return (
-			<Box sx={classes.VehicleView}>
+			<Box sx={sharedClasses.view}>
 				<Skeletons amount={12} />
 			</Box>
 		);
@@ -39,23 +29,7 @@ const VehiclesView: React.FC<VehiclesViewProps> = () => {
 		return <Vehicle key={vehicle.name} data={vehicle} />;
 	});
 
-	const handleChangeValue = (
-		e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
-	) => {
-		setSearchValue(e.target.value);
-	};
-
-	return (
-		<>
-			<TextField
-				variant="outlined"
-				value={searchValue}
-				onChange={handleChangeValue}
-				placeholder={"Search vehicle by name"}
-			/>
-			<Box sx={classes.VehicleView}>{renderFilms}</Box>
-		</>
-	);
+	return <Box sx={sharedClasses.view}>{renderFilms}</Box>;
 };
 
 export default VehiclesView;

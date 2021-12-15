@@ -1,31 +1,21 @@
-import { Box, SxProps, TextField, Theme } from "@mui/material";
-import { useState } from "react";
+import { Box } from "@mui/material";
 import { useSelector } from "react-redux";
 import { PeopleResultsArray } from "../../api";
 import { RootState } from "../../app/store";
 import Person from "./Person";
 import Skeletons from "../Skeletons";
+import { sharedClasses } from "../sharedClasses";
 
-interface PeopleViewProps {}
+interface PeopleViewProps {
+	searchValue: string;
+}
 
-const classes: SxProps<Theme> = {
-	peopleView: {
-		display: "flex",
-		width: "100%",
-		gap: "15px",
-		flexWrap: "wrap",
-		justifyContent: "center",
-	},
-};
-
-const PeopleView: React.FC<PeopleViewProps> = () => {
+const PeopleView: React.FC<PeopleViewProps> = ({ searchValue }) => {
 	const { people } = useSelector((state: RootState) => state.api);
-
-	const [searchValue, setSearchValue] = useState("");
 
 	if (!people.length) {
 		return (
-			<Box sx={classes.peopleView}>
+			<Box sx={sharedClasses.view}>
 				<Skeletons amount={12} />
 			</Box>
 		);
@@ -40,24 +30,8 @@ const PeopleView: React.FC<PeopleViewProps> = () => {
 			return <Person key={person.name} data={person} />;
 		}
 	);
-	const handleChangeValue = (
-		e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
-	) => {
-		setSearchValue(e.target.value);
-	};
 
-	return (
-		<>
-			<TextField
-				variant="outlined"
-				placeholder="Search by name"
-				value={searchValue}
-				onChange={handleChangeValue}
-			/>
-
-			<Box sx={classes.peopleView}>{renderPerson}</Box>
-		</>
-	);
+	return <Box sx={sharedClasses.view}>{renderPerson}</Box>;
 };
 
 export default PeopleView;

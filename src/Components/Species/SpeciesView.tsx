@@ -1,30 +1,20 @@
-import { Box, SxProps, TextField, Theme } from "@mui/material";
-import { useState } from "react";
+import { Box } from "@mui/material";
 import { useSelector } from "react-redux";
 import { RootState } from "../../app/store";
+import { sharedClasses } from "../sharedClasses";
 import Skeletons from "../Skeletons";
 import Specie from "./Spicie";
 
-interface SpeciesViewProps {}
+interface SpeciesViewProps {
+	searchValue: string;
+}
 
-const classes: SxProps<Theme> = {
-	speciesView: {
-		display: "flex",
-		width: "100%",
-		gap: "15px",
-		flexWrap: "wrap",
-		justifyContent: "center",
-	},
-};
-
-const SpeciesView: React.FC<SpeciesViewProps> = () => {
+const SpeciesView: React.FC<SpeciesViewProps> = ({ searchValue }) => {
 	const { species } = useSelector((state: RootState) => state.api);
-
-	const [searchValue, setSearchValue] = useState("");
 
 	if (!species.length) {
 		return (
-			<Box sx={classes.speciesView}>
+			<Box sx={sharedClasses.view}>
 				<Skeletons amount={12} />
 			</Box>
 		);
@@ -38,23 +28,7 @@ const SpeciesView: React.FC<SpeciesViewProps> = () => {
 		return <Specie key={specie.name} data={specie} />;
 	});
 
-	const handleChangeValue = (
-		e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
-	) => {
-		setSearchValue(e.target.value);
-	};
-
-	return (
-		<>
-			<TextField
-				variant="outlined"
-				value={searchValue}
-				onChange={handleChangeValue}
-				placeholder={"Search specie by name"}
-			/>
-			<Box sx={classes.speciesView}>{renderSpecies}</Box>
-		</>
-	);
+	return <Box sx={sharedClasses.view}>{renderSpecies}</Box>;
 };
 
 export default SpeciesView;

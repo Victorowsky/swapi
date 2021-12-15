@@ -1,31 +1,21 @@
-import { Box, SxProps, TextField, Theme } from "@mui/material";
-import { useState } from "react";
+import { Box } from "@mui/material";
 import { useSelector } from "react-redux";
 import { FilmsResultsArray } from "../../api";
 import { RootState } from "../../app/store";
+import { sharedClasses } from "../sharedClasses";
 import Skeletons from "../Skeletons";
 import Film from "./Film";
 
-interface FilmsViewProps {}
+interface FilmsViewProps {
+	searchValue: string;
+}
 
-const classes: SxProps<Theme> = {
-	FilmsView: {
-		display: "flex",
-		width: "100%",
-		gap: "15px",
-		flexWrap: "wrap",
-		justifyContent: "center",
-	},
-};
-
-const FilmsView: React.FC<FilmsViewProps> = () => {
+const FilmsView: React.FC<FilmsViewProps> = ({ searchValue }) => {
 	const { films } = useSelector((state: RootState) => state.api);
-
-	const [searchValue, setSearchValue] = useState("");
 
 	if (!films.length) {
 		return (
-			<Box sx={classes.FilmsView}>
+			<Box sx={sharedClasses.view}>
 				<Skeletons amount={12} />
 			</Box>
 		);
@@ -39,23 +29,7 @@ const FilmsView: React.FC<FilmsViewProps> = () => {
 		return <Film key={film.title} data={film} />;
 	});
 
-	const handleChangeValue = (
-		e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
-	) => {
-		setSearchValue(e.target.value);
-	};
-
-	return (
-		<>
-			<TextField
-				variant="outlined"
-				value={searchValue}
-				onChange={handleChangeValue}
-				placeholder={"Search film by title"}
-			/>
-			<Box sx={classes.FilmsView}>{renderFilms}</Box>
-		</>
-	);
+	return <Box sx={sharedClasses.view}>{renderFilms}</Box>;
 };
 
 export default FilmsView;

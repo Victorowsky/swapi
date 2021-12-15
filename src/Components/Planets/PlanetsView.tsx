@@ -1,30 +1,21 @@
-import { Box, SxProps, TextField, Theme } from "@mui/material";
+import { Box } from "@mui/material";
 import { useSelector } from "react-redux";
 import { PlanetsResultsArray } from "../../api";
 import { RootState } from "../../app/store";
 import Planet from "./Planet";
 import Skeletons from "../Skeletons";
-import { useState } from "react";
+import { sharedClasses } from "../sharedClasses";
 
-interface PlanetsViewProps {}
+interface PlanetsViewProps {
+	searchValue: string;
+}
 
-const classes: SxProps<Theme> = {
-	planetsView: {
-		display: "flex",
-		width: "100%",
-		gap: "15px",
-		flexWrap: "wrap",
-		justifyContent: "center",
-	},
-};
-const PlanetsView: React.FC<PlanetsViewProps> = () => {
+const PlanetsView: React.FC<PlanetsViewProps> = ({ searchValue }) => {
 	const { planets } = useSelector((state: RootState) => state.api);
-
-	const [searchValue, setSearchValue] = useState("");
 
 	if (!planets.length)
 		return (
-			<Box sx={classes.planetsView}>
+			<Box sx={sharedClasses.view}>
 				<Skeletons amount={12} />
 			</Box>
 		);
@@ -39,17 +30,7 @@ const PlanetsView: React.FC<PlanetsViewProps> = () => {
 		}
 	);
 
-	return (
-		<>
-			<TextField
-				variant="outlined"
-				placeholder={"Search planet by name"}
-				value={searchValue}
-				onChange={(e) => setSearchValue(e.target.value)}
-			/>
-			<Box sx={classes.planetsView}>{renderPlanets}</Box>
-		</>
-	);
+	return <Box sx={sharedClasses.view}>{renderPlanets}</Box>;
 };
 
 export default PlanetsView;

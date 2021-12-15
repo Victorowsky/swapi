@@ -1,31 +1,21 @@
-import { Box, SxProps, TextField, Theme } from "@mui/material";
-import { useState } from "react";
+import { Box } from "@mui/material";
 import { useSelector } from "react-redux";
 import { StarshipsResultsArray } from "../../api";
 import { RootState } from "../../app/store";
+import { sharedClasses } from "../sharedClasses";
 import Skeletons from "../Skeletons";
 import Starship from "./Starship";
 
-interface StarshipsViewProps {}
+interface StarshipsViewProps {
+	searchValue: string;
+}
 
-const classes: SxProps<Theme> = {
-	starshipsView: {
-		display: "flex",
-		width: "100%",
-		gap: "15px",
-		flexWrap: "wrap",
-		justifyContent: "center",
-	},
-};
-
-const StarshipsView: React.FC<StarshipsViewProps> = () => {
+const StarshipsView: React.FC<StarshipsViewProps> = ({ searchValue }) => {
 	const { starships } = useSelector((state: RootState) => state.api);
-
-	const [searchValue, setSearchValue] = useState("");
 
 	if (!starships.length) {
 		return (
-			<Box sx={classes.starshipsView}>
+			<Box sx={sharedClasses.view}>
 				<Skeletons amount={12} />
 			</Box>
 		);
@@ -41,23 +31,7 @@ const StarshipsView: React.FC<StarshipsViewProps> = () => {
 		}
 	);
 
-	const handleChangeValue = (
-		e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
-	) => {
-		setSearchValue(e.target.value);
-	};
-
-	return (
-		<>
-			<TextField
-				variant="outlined"
-				value={searchValue}
-				onChange={handleChangeValue}
-				placeholder={"Search starship by title"}
-			/>
-			<Box sx={classes.starshipsView}>{renderStarships}</Box>
-		</>
-	);
+	return <Box sx={sharedClasses.view}>{renderStarships}</Box>;
 };
 
 export default StarshipsView;
