@@ -1,5 +1,5 @@
-import { TextField } from "@mui/material";
-import { useEffect, useState } from "react";
+import { Box, SxProps, TextField, Theme } from "@mui/material";
+import { useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../app/store";
 import ChooseCategory from "./ChooseCategory";
@@ -12,6 +12,19 @@ import VehiclesView from "./Vehicles/VehiclesView";
 
 interface HomeProps {}
 
+const classes: SxProps<Theme> = {
+	homeBox: {
+		display: "flex",
+		flexDirection: "column",
+		alignItems: "center",
+		gap: "15px",
+		paddingBottom: "5px",
+	},
+	textField: {
+		width: "200px",
+	},
+};
+
 const Home: React.FC<HomeProps> = () => {
 	const { category } = useSelector((state: RootState) => state.api);
 
@@ -22,8 +35,6 @@ const Home: React.FC<HomeProps> = () => {
 	) => {
 		setSearchValue(e.target.value);
 	};
-
-	useEffect(() => {}, []);
 
 	let currentComponent: JSX.Element;
 
@@ -53,16 +64,17 @@ const Home: React.FC<HomeProps> = () => {
 	}
 
 	return (
-		<>
+		<Box sx={classes.homeBox}>
 			<ChooseCategory />
 			<TextField
+				sx={classes.textField}
 				variant="outlined"
-				placeholder="Search by name"
+				placeholder={`Search ${category}`}
 				value={searchValue}
 				onChange={handleChangeValue}
 			/>
 			{currentComponent}
-		</>
+		</Box>
 	);
 };
 

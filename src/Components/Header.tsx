@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 interface HeaderProps {}
 
-const classes: any = {
+const classes: React.CSSProperties | any = {
 	link: {
 		textDecoration: "none",
 		color: "inherit",
