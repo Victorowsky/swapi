@@ -161,7 +161,7 @@ const PersonDetails: React.FC<PersonDetailsProps> = () => {
 				<Typography align="center" variant="h4">
 					Movies
 				</Typography>
-				{renderMovies}
+				<Box>{renderMovies}</Box>
 			</Paper>
 
 			{Boolean(currentPerson.vehicles.length) && (
@@ -169,7 +169,7 @@ const PersonDetails: React.FC<PersonDetailsProps> = () => {
 					<Typography align="center" variant="h4">
 						Vehicles
 					</Typography>
-					{renderPersonVehicles}
+					<Box>{renderPersonVehicles}</Box>
 				</Paper>
 			)}
 			{Boolean(currentPerson.starships.length) && (
@@ -177,7 +177,7 @@ const PersonDetails: React.FC<PersonDetailsProps> = () => {
 					<Typography align="center" variant="h4">
 						Starships
 					</Typography>
-					{renderPersonStarships}
+					<Box>{renderPersonStarships}</Box>
 				</Paper>
 			)}
 		</Box>
