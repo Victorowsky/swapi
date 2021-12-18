@@ -58,7 +58,7 @@ const UniversalView: React.FC<UniversalViewProps> = ({
 		}
 	}, [category, dispatch, state]);
 
-	if (true) {
+	if (!state.length) {
 		return (
 			<Box sx={sharedClasses.view}>
 				<Skeletons amount={12} />
