@@ -1,5 +1,5 @@
 import { Box, Paper, Skeleton, Typography } from "@mui/material";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
@@ -21,13 +21,19 @@ const SpecieDetails: React.FC<SpecieDetailsProps> = () => {
 	const { species, films, people } = useSelector(
 		(state: RootState) => state.api
 	);
+
+	const [tryFetch, setTryFetch] = useState(true);
+
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		getNeedData(films, "films", dispatch, setFilms);
-		getNeedData(people, "people", dispatch, setPeople);
-		getNeedData(species, "species", dispatch, setSpecies);
-	}, [dispatch, films, people, species]);
+		if (tryFetch) {
+			getNeedData(films, "films", dispatch, setFilms);
+			getNeedData(people, "people", dispatch, setPeople);
+			getNeedData(species, "species", dispatch, setSpecies);
+			setTryFetch(false);
+		}
+	}, [dispatch, films, people, species, tryFetch]);
 
 	if (!people.length || !films.length || !species.length) {
 		return (

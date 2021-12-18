@@ -6,7 +6,7 @@ import { RootState } from "../../app/store";
 import { FilmsResultsArray } from "../../api";
 import { Link } from "react-router-dom";
 import { detailsClasses } from "../sharedClasses";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { setFilms, setPeople, setStarships } from "../../features/apiSlice";
 import { getNeedData } from "../../App";
 
@@ -19,13 +19,18 @@ const StarshipDetails: React.FC<StarshipDetailsProps> = () => {
 		(state: RootState) => state.api
 	);
 
+	const [tryFetch, setTryFetch] = useState(true);
+
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		getNeedData(films, "films", dispatch, setFilms);
-		getNeedData(people, "people", dispatch, setPeople);
-		getNeedData(starships, "starships", dispatch, setStarships);
-	}, [dispatch, films, people, starships]);
+		if (tryFetch) {
+			getNeedData(films, "films", dispatch, setFilms);
+			getNeedData(people, "people", dispatch, setPeople);
+			getNeedData(starships, "starships", dispatch, setStarships);
+			setTryFetch(false);
+		}
+	}, [dispatch, films, tryFetch, people, starships]);
 
 	if (!people.length || !films.length || !starships.length) {
 		return (

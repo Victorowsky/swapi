@@ -1,5 +1,5 @@
 import { Box, Paper, Skeleton, Typography } from "@mui/material";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
@@ -21,13 +21,19 @@ const VehicleDetails: React.FC<VehicleDetailsProps> = () => {
 	const { vehicles, films, people } = useSelector(
 		(state: RootState) => state.api
 	);
+
+	const [tryFetch, setTryFetch] = useState(true);
+
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		getNeedData(vehicles, "vehicles", dispatch, setVehicles);
-		getNeedData(films, "films", dispatch, setFilms);
-		getNeedData(people, "people", dispatch, setPeople);
-	}, [dispatch, films, people, vehicles]);
+		if (tryFetch) {
+			getNeedData(vehicles, "vehicles", dispatch, setVehicles);
+			getNeedData(films, "films", dispatch, setFilms);
+			getNeedData(people, "people", dispatch, setPeople);
+			setTryFetch(false);
+		}
+	}, [dispatch, films, people, vehicles, tryFetch]);
 
 	if (!vehicles.length || !people.length || !films.length) {
 		return (

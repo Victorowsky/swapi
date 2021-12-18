@@ -1,5 +1,5 @@
 import { Box, Paper, Skeleton, Typography } from "@mui/material";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
@@ -32,16 +32,30 @@ const FilmDetails: React.FC<FilmDetailsProps> = () => {
 		(state: RootState) => state.api
 	);
 
+	const [tryFetch, setTryFetch] = useState(true);
+
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		getNeedData(vehicles, "vehicles", dispatch, setVehicles);
-		getNeedData(films, "films", dispatch, setFilms);
-		getNeedData(people, "people", dispatch, setPeople);
-		getNeedData(planets, "planets", dispatch, setPlanets);
-		getNeedData(starships, "starships", dispatch, setStarships);
-		getNeedData(species, "species", dispatch, setSpecies);
-	}, [dispatch, films, people, vehicles, planets, starships, species]);
+		if (tryFetch) {
+			getNeedData(vehicles, "vehicles", dispatch, setVehicles);
+			getNeedData(films, "films", dispatch, setFilms);
+			getNeedData(people, "people", dispatch, setPeople);
+			getNeedData(planets, "planets", dispatch, setPlanets);
+			getNeedData(starships, "starships", dispatch, setStarships);
+			getNeedData(species, "species", dispatch, setSpecies);
+			setTryFetch(false);
+		}
+	}, [
+		dispatch,
+		films,
+		people,
+		vehicles,
+		planets,
+		starships,
+		species,
+		tryFetch,
+	]);
 
 	if (
 		!vehicles.length ||

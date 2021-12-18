@@ -1,5 +1,5 @@
 import { Box, Paper, Skeleton, Typography } from "@mui/material";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
@@ -20,15 +20,20 @@ const PlanetDetails: React.FC<PlanetDetailsProps> = () => {
 		(state: RootState) => state.api
 	);
 
+	const [tryFetch, setTryFetch] = useState(true);
+
 	const { planetName } = useParams();
 
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		getNeedData(films, "films", dispatch, setFilms);
-		getNeedData(people, "people", dispatch, setPeople);
-		getNeedData(planets, "planets", dispatch, setPlanets);
-	}, [dispatch, films, people, planets]);
+		if (tryFetch) {
+			getNeedData(films, "films", dispatch, setFilms);
+			getNeedData(people, "people", dispatch, setPeople);
+			getNeedData(planets, "planets", dispatch, setPlanets);
+			setTryFetch(false);
+		}
+	}, [dispatch, films, tryFetch, people, planets]);
 
 	if (!planets.length || !people.length || !films.length) {
 		return (
