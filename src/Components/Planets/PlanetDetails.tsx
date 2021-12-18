@@ -5,10 +5,10 @@ import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 import {
 	FilmsResultsArray,
-	getAllItems,
 	PeopleResultsArray,
 	PlanetsResultsArray,
 } from "../../api";
+import { getNeedData } from "../../App";
 import { RootState } from "../../app/store";
 import { setFilms, setPeople, setPlanets } from "../../features/apiSlice";
 import { detailsClasses } from "../sharedClasses";
@@ -25,24 +25,9 @@ const PlanetDetails: React.FC<PlanetDetailsProps> = () => {
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		if (!films.length) {
-			(async () => {
-				const response = getAllItems("films");
-				dispatch(setFilms(await response));
-			})();
-		}
-		if (!people.length) {
-			(async () => {
-				const response = getAllItems("people");
-				dispatch(setPeople(await response));
-			})();
-		}
-		if (!planets.length) {
-			(async () => {
-				const response = getAllItems("planets");
-				dispatch(setPlanets(await response));
-			})();
-		}
+		getNeedData(films, "films", dispatch, setFilms);
+		getNeedData(people, "people", dispatch, setPeople);
+		getNeedData(planets, "planets", dispatch, setPlanets);
 	}, [dispatch, films, people, planets]);
 
 	if (!planets.length || !people.length || !films.length) {

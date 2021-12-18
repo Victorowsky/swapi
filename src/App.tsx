@@ -1,6 +1,8 @@
 import { ThemeProvider } from "@emotion/react";
 import { Box, createTheme, SxProps, Theme } from "@mui/material";
 import { Route, Routes } from "react-router";
+import { Dispatch } from "redux";
+import { getAllItems } from "./api";
 import FilmDetails from "./Components/Films/FilmsDetails";
 import Header from "./Components/Header";
 import Home from "./Components/Home";
@@ -28,6 +30,20 @@ const classes: SxProps<Theme> | any = {
 		display: "flex",
 		"flex-wrap": "wrap",
 	},
+};
+
+export const getNeedData = async (
+	stateArray: any[],
+	dataName: string,
+	dispatch: Dispatch,
+	setState: any
+) => {
+	if (!stateArray.length) {
+		(async () => {
+			const response = getAllItems(dataName);
+			dispatch(setState(await response));
+		})();
+	}
 };
 
 function App() {

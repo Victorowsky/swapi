@@ -5,11 +5,11 @@ import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 import {
 	FilmsResultsArray,
-	getAllItems,
 	PeopleResultsArray,
 	StarshipsResultsArray,
 	VehiclesResultsArray,
 } from "../../api";
+import { getNeedData } from "../../App";
 import { RootState } from "../../app/store";
 import {
 	setFilms,
@@ -32,36 +32,11 @@ const PersonDetails: React.FC<PersonDetailsProps> = () => {
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		if (!vehicles.length) {
-			(async () => {
-				const response = getAllItems("vehicles");
-				dispatch(setVehicles(await response));
-			})();
-		}
-		if (!films.length) {
-			(async () => {
-				const response = getAllItems("films");
-				dispatch(setFilms(await response));
-			})();
-		}
-		if (!people.length) {
-			(async () => {
-				const response = getAllItems("people");
-				dispatch(setPeople(await response));
-			})();
-		}
-		if (!planets.length) {
-			(async () => {
-				const response = getAllItems("planets");
-				dispatch(setPlanets(await response));
-			})();
-		}
-		if (!starships.length) {
-			(async () => {
-				const response = getAllItems("starships");
-				dispatch(setStarships(await response));
-			})();
-		}
+		getNeedData(vehicles, "vehicles", dispatch, setVehicles);
+		getNeedData(films, "films", dispatch, setFilms);
+		getNeedData(people, "people", dispatch, setPeople);
+		getNeedData(planets, "planets", dispatch, setPlanets);
+		getNeedData(starships, "starships", dispatch, setStarships);
 	}, [dispatch, films, people, vehicles, planets, starships]);
 
 	if (

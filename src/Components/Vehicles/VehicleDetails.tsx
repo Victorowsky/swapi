@@ -5,10 +5,10 @@ import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 import {
 	FilmsResultsArray,
-	getAllItems,
 	PeopleResultsArray,
 	VehiclesResultsArray,
 } from "../../api";
+import { getNeedData } from "../../App";
 import { RootState } from "../../app/store";
 import { setFilms, setPeople, setVehicles } from "../../features/apiSlice";
 import { detailsClasses } from "../sharedClasses";
@@ -24,24 +24,9 @@ const VehicleDetails: React.FC<VehicleDetailsProps> = () => {
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		if (!vehicles.length) {
-			(async () => {
-				const response = getAllItems("vehicles");
-				dispatch(setVehicles(await response));
-			})();
-		}
-		if (!films.length) {
-			(async () => {
-				const response = getAllItems("films");
-				dispatch(setFilms(await response));
-			})();
-		}
-		if (!people.length) {
-			(async () => {
-				const response = getAllItems("people");
-				dispatch(setPeople(await response));
-			})();
-		}
+		getNeedData(vehicles, "vehicles", dispatch, setVehicles);
+		getNeedData(films, "films", dispatch, setFilms);
+		getNeedData(people, "people", dispatch, setPeople);
 	}, [dispatch, films, people, vehicles]);
 
 	if (!vehicles.length || !people.length || !films.length) {
