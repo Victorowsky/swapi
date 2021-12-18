@@ -7,6 +7,8 @@ interface SkeletonsProps {
 const classes: SxProps<Theme> = {
 	skeleton: {
 		borderRadius: "5px",
+		width: "95vw",
+		maxWidth: "400px",
 	},
 };
 
@@ -18,7 +20,6 @@ const Skeletons: React.FC<SkeletonsProps> = ({ amount }) => {
 				<Skeleton
 					key={index}
 					variant="rectangular"
-					width={400}
 					height={250}
 					animation="wave"
 					sx={classes.skeleton}
