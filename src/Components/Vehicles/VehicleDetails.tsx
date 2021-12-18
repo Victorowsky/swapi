@@ -10,7 +10,7 @@ import {
 	VehiclesResultsArray,
 } from "../../api";
 import { RootState } from "../../app/store";
-import { setVehicles } from "../../features/apiSlice";
+import { setFilms, setPeople, setVehicles } from "../../features/apiSlice";
 import { detailsClasses } from "../sharedClasses";
 
 interface VehicleDetailsProps {}
@@ -26,13 +26,25 @@ const VehicleDetails: React.FC<VehicleDetailsProps> = () => {
 	useEffect(() => {
 		if (!vehicles.length) {
 			(async () => {
-				const vehicles = getAllItems("vehicles");
-				dispatch(setVehicles(await vehicles));
+				const response = getAllItems("vehicles");
+				dispatch(setVehicles(await response));
 			})();
 		}
-	}, [dispatch, vehicles]);
+		if (!films.length) {
+			(async () => {
+				const response = getAllItems("films");
+				dispatch(setFilms(await response));
+			})();
+		}
+		if (!people.length) {
+			(async () => {
+				const response = getAllItems("people");
+				dispatch(setPeople(await response));
+			})();
+		}
+	}, [dispatch, films, people, vehicles]);
 
-	if (!vehicles.length) {
+	if (!vehicles.length || !people.length || !films.length) {
 		return (
 			<Skeleton
 				variant="rectangular"

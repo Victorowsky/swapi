@@ -1,9 +1,11 @@
 import { Box, Paper, Skeleton, Typography } from "@mui/material";
-import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 import {
 	FilmsResultsArray,
+	getAllItems,
 	PeopleResultsArray,
 	PlanetsResultsArray,
 	SpeciesResultsArray,
@@ -11,6 +13,14 @@ import {
 	VehiclesResultsArray,
 } from "../../api";
 import { RootState } from "../../app/store";
+import {
+	setFilms,
+	setPeople,
+	setPlanets,
+	setSpecies,
+	setStarships,
+	setVehicles,
+} from "../../features/apiSlice";
 import { detailsClasses } from "../sharedClasses";
 
 interface FilmDetailsProps {}
@@ -22,14 +32,63 @@ const FilmDetails: React.FC<FilmDetailsProps> = () => {
 		(state: RootState) => state.api
 	);
 
-	if (!films.length)
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		if (!vehicles.length) {
+			(async () => {
+				const response = getAllItems("vehicles");
+				dispatch(setVehicles(await response));
+			})();
+		}
+		if (!species.length) {
+			(async () => {
+				const response = getAllItems("species");
+				dispatch(setSpecies(await response));
+			})();
+		}
+		if (!films.length) {
+			(async () => {
+				const response = getAllItems("films");
+				dispatch(setFilms(await response));
+			})();
+		}
+		if (!people.length) {
+			(async () => {
+				const response = getAllItems("people");
+				dispatch(setPeople(await response));
+			})();
+		}
+		if (!planets.length) {
+			(async () => {
+				const response = getAllItems("planets");
+				dispatch(setPlanets(await response));
+			})();
+		}
+		if (!starships.length) {
+			(async () => {
+				const response = getAllItems("starships");
+				dispatch(setStarships(await response));
+			})();
+		}
+	}, [dispatch, films, people, vehicles, planets, starships, species]);
+
+	if (
+		!vehicles.length ||
+		!planets.length ||
+		!people.length ||
+		!films.length ||
+		!starships.length ||
+		!species.length
+	) {
 		return (
 			<Skeleton
-				animation="wave"
 				variant="rectangular"
+				animation="wave"
 				sx={detailsClasses.skeleton}
 			/>
 		);
+	}
 
 	const currentFilm = films.find(
 		(film: FilmsResultsArray) => film.title === movieTitle

@@ -1,13 +1,16 @@
 import { Box, Paper, Skeleton, Typography } from "@mui/material";
-import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 import {
 	FilmsResultsArray,
+	getAllItems,
 	PeopleResultsArray,
 	SpeciesResultsArray,
 } from "../../api";
 import { RootState } from "../../app/store";
+import { setFilms, setPeople, setSpecies } from "../../features/apiSlice";
 import { detailsClasses } from "../sharedClasses";
 
 interface SpecieDetailsProps {}
@@ -18,15 +21,38 @@ const SpecieDetails: React.FC<SpecieDetailsProps> = () => {
 	const { species, films, people } = useSelector(
 		(state: RootState) => state.api
 	);
+	const dispatch = useDispatch();
 
-	if (!species.length)
+	useEffect(() => {
+		if (!species.length) {
+			(async () => {
+				const response = getAllItems("species");
+				dispatch(setSpecies(await response));
+			})();
+		}
+		if (!films.length) {
+			(async () => {
+				const response = getAllItems("films");
+				dispatch(setFilms(await response));
+			})();
+		}
+		if (!people.length) {
+			(async () => {
+				const response = getAllItems("people");
+				dispatch(setPeople(await response));
+			})();
+		}
+	}, [dispatch, films, people, species]);
+
+	if (!people.length || !films.length || !species.length) {
 		return (
 			<Skeleton
-				animation="wave"
 				variant="rectangular"
+				animation="wave"
 				sx={detailsClasses.skeleton}
 			/>
 		);
+	}
 
 	const currentSpecie = species.find(
 		(specie: SpeciesResultsArray) => specie.name === specieName

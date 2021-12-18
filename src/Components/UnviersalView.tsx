@@ -1,4 +1,4 @@
-import { Box, Paper } from "@mui/material";
+import { Box } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 
 import Skeletons from "./Skeletons";
@@ -7,14 +7,13 @@ import {
 	setFilms,
 	setPeople,
 	setPlanets,
-	setSpicies,
+	setSpecies,
 	setStarships,
 	setVehicles,
 } from "../features/apiSlice";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { RootState } from "../app/store";
 import { getAllItems } from "../api";
-import { Link } from "react-router-dom";
 import Person from "./People/Person";
 import Film from "./Films/Film";
 import Planet from "./Planets/Planet";
@@ -49,7 +48,7 @@ const UniversalView: React.FC<UniversalViewProps> = ({
 						dispatch(setPlanets(items));
 						break;
 					case "species":
-						dispatch(setSpicies(items));
+						dispatch(setSpecies(items));
 						break;
 					case "starships":
 						dispatch(setStarships(items));
@@ -78,6 +77,7 @@ const UniversalView: React.FC<UniversalViewProps> = ({
 		} else if (item.title) {
 			return item?.title?.match(new RegExp(searchValue, "gi"));
 		}
+		return false;
 	});
 
 	const renderItems: JSX.Element[] = filteredArray?.map((item: any) => {

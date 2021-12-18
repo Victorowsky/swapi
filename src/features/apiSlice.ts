@@ -41,7 +41,7 @@ const apiSlice = createSlice({
 		setPlanets: (state, action) => {
 			state.planets = action.payload;
 		},
-		setSpicies: (state, action) => {
+		setSpecies: (state, action) => {
 			state.species = action.payload;
 		},
 		changeCategory: (state, action) => {
@@ -61,7 +61,7 @@ export const {
 	setFilms,
 	changeCategory,
 	setPlanets,
-	setSpicies,
+	setSpecies,
 	setVehicles,
 	setStarships,
 } = apiSlice.actions;
