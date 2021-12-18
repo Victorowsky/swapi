@@ -18,7 +18,7 @@ const Planet: React.FC<PlanetProps> = ({ data }) => {
 				<Typography>Population: {population}</Typography>
 				<Typography>Gravity: {gravity}</Typography>
 				<Typography>Climate: {climate}</Typography>
-				<Typography>In {films.length} movies</Typography>
+				<Typography>In {films?.length} movies</Typography>
 			</Paper>
 		</Link>
 	);

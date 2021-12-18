@@ -1,13 +1,16 @@
 import { Box, Paper, Skeleton, Typography } from "@mui/material";
-import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 import {
 	FilmsResultsArray,
+	getAllItems,
 	PeopleResultsArray,
 	VehiclesResultsArray,
 } from "../../api";
 import { RootState } from "../../app/store";
+import { setVehicles } from "../../features/apiSlice";
 import { detailsClasses } from "../sharedClasses";
 
 interface VehicleDetailsProps {}
@@ -18,6 +21,16 @@ const VehicleDetails: React.FC<VehicleDetailsProps> = () => {
 	const { vehicles, films, people } = useSelector(
 		(state: RootState) => state.api
 	);
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		if (!vehicles.length) {
+			(async () => {
+				const vehicles = getAllItems("vehicles");
+				dispatch(setVehicles(await vehicles));
+			})();
+		}
+	}, [dispatch, vehicles]);
 
 	if (!vehicles.length) {
 		return (

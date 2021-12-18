@@ -128,7 +128,7 @@ const PersonDetails: React.FC<PersonDetailsProps> = () => {
 			</Paper>
 
 			<Paper sx={detailsClasses.paper}>
-				<Typography align="center" variant="h4">
+				<Typography variant="h4">
 					Movies
 					{renderMovies}
 				</Typography>

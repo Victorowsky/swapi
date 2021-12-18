@@ -25,7 +25,7 @@ const initialState: apiSliceProps = {
 	species: [],
 	vehicles: [],
 	starships: [],
-	category: "characters",
+	category: "people",
 };
 
 const apiSlice = createSlice({

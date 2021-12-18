@@ -150,7 +150,7 @@ export interface Vehicle {
 }
 
 export const getFilms = (page: number = 1): Promise<Films> => {
-	return fetch(`https://swapi.dev/api/films/?page=${page}`).then((res) =>
+	return fetch(`https://swapi.py4e.com/api/films/?page=${page}`).then((res) =>
 		res.json()
 	);
 };
@@ -178,7 +178,7 @@ export const getAllFilms = async (): Promise<FilmsResultsArray[]> => {
 };
 
 export const getPeople = async (page: number = 1): Promise<People> => {
-	return fetch(`https://swapi.dev/api/people/?page=${page}`).then((res) =>
+	return fetch(`https://swapi.py4e.com/api/people/?page=${page}`).then((res) =>
 		res.json()
 	);
 };
@@ -206,7 +206,7 @@ export const getAllPeople = async (): Promise<PeopleResultsArray[]> => {
 };
 
 export const getPlanets = (page: number = 1): Promise<Planets> => {
-	return fetch(`https://swapi.dev/api/planets/?page=${page}`).then((res) =>
+	return fetch(`https://swapi.py4e.com/api/planets/?page=${page}`).then((res) =>
 		res.json()
 	);
 };
@@ -234,7 +234,7 @@ export const getAllPlanets = async (): Promise<PlanetsResultsArray[]> => {
 };
 
 export const getSpecies = (page: number = 1): Promise<Species> => {
-	return fetch(`https://swapi.dev/api/species/?page=${page}`).then((res) =>
+	return fetch(`https://swapi.py4e.com/api/species/?page=${page}`).then((res) =>
 		res.json()
 	);
 };
@@ -262,8 +262,8 @@ export const getAllSpecies = async (): Promise<SpeciesResultsArray[]> => {
 };
 
 export const getStarships = (page: number = 1): Promise<Starships> => {
-	return fetch(`https://swapi.dev/api/starships/?page=${page}`).then((res) =>
-		res.json()
+	return fetch(`https://swapi.py4e.com/api/starships/?page=${page}`).then(
+		(res) => res.json()
 	);
 };
 
@@ -289,8 +289,8 @@ export const getAllStarships = async (): Promise<StarshipsResultsArray[]> => {
 	return starShipsArray;
 };
 export const getVehicles = (page: number = 1) => {
-	return fetch(`https://swapi.dev/api/vehicles/?page=${page}`).then((res) =>
-		res.json()
+	return fetch(`https://swapi.py4e.com/api/vehicles/?page=${page}`).then(
+		(res) => res.json()
 	);
 };
 
@@ -313,4 +313,33 @@ export const getAllVehicles = async (): Promise<VehiclesResultsArray[]> => {
 		counter++;
 	}
 	return vehicleArray;
+};
+
+export const getAllItems = async (category: string): Promise<any[]> => {
+	let responseArray: any[] = [];
+	let nextUrl: string = "";
+
+	await fetch(`https://swapi.py4e.com/api/${category}/?page=1`).then((res) =>
+		res
+			.json()
+			.then((res) => {
+				nextUrl = res.next;
+				responseArray.push(...res.results);
+			})
+			.catch((err) => console.error(err))
+	);
+
+	while (nextUrl) {
+		// eslint-disable-next-line no-loop-func
+		await fetch(nextUrl).then((res) =>
+			res
+				.json()
+				.then((res) => {
+					responseArray.push(...res.results);
+					nextUrl = res.next;
+				})
+				.catch((err) => console.error(err))
+		);
+	}
+	return responseArray;
 };

@@ -3,12 +3,7 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../app/store";
 import ChooseCategory from "./ChooseCategory";
-import FilmsView from "./Films/FilmsView";
-import PeopleView from "./People/PeopleView";
-import PlanetsView from "./Planets/PlanetsView";
-import SpeciesView from "./Species/SpeciesView";
-import StarshipsView from "./Starships/StarshipsView";
-import VehiclesView from "./Vehicles/VehiclesView";
+import UniversalView from "./UnviersalView";
 
 interface HomeProps {}
 
@@ -26,7 +21,8 @@ const classes: SxProps<Theme> = {
 };
 
 const Home: React.FC<HomeProps> = () => {
-	const { category } = useSelector((state: RootState) => state.api);
+	const { category, people, films, planets, species, starships, vehicles } =
+		useSelector((state: RootState) => state.api);
 
 	const [searchValue, setSearchValue] = useState("");
 
@@ -36,30 +32,35 @@ const Home: React.FC<HomeProps> = () => {
 		setSearchValue(e.target.value);
 	};
 
-	let currentComponent: JSX.Element;
+	let currentState;
 
 	switch (category) {
-		case "characters":
-			currentComponent = <PeopleView searchValue={searchValue} />;
+		case "people":
+			currentState = people;
 			break;
 		case "planets":
-			currentComponent = <PlanetsView searchValue={searchValue} />;
+			currentState = planets;
+
 			break;
 		case "species":
-			currentComponent = <SpeciesView searchValue={searchValue} />;
+			currentState = species;
+
 			break;
 		case "films":
-			currentComponent = <FilmsView searchValue={searchValue} />;
+			currentState = films;
+
 			break;
 		case "starships":
-			currentComponent = <StarshipsView searchValue={searchValue} />;
+			currentState = starships;
+
 			break;
 		case "vehicles":
-			currentComponent = <VehiclesView searchValue={searchValue} />;
+			currentState = vehicles;
+
 			break;
 
 		default:
-			currentComponent = <PeopleView searchValue={searchValue} />;
+			currentState = people;
 			break;
 	}
 
@@ -73,7 +74,7 @@ const Home: React.FC<HomeProps> = () => {
 				value={searchValue}
 				onChange={handleChangeValue}
 			/>
-			{currentComponent}
+			<UniversalView searchValue={searchValue} state={currentState} />
 		</Box>
 	);
 };

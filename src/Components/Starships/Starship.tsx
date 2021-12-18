@@ -17,7 +17,7 @@ const Starship: React.FC<StarshipProps> = ({ data }) => {
 					{name}
 				</Typography>
 				<Typography>Length: {length}m</Typography>
-				<Typography>Pilots: {pilots.length}</Typography>
+				<Typography>Pilots: {pilots?.length}</Typography>
 				<Typography>Cost: {cost_in_credits}</Typography>
 			</Paper>
 		</Link>

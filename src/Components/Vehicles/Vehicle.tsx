@@ -15,7 +15,7 @@ const Vehicle: React.FC<VehicleProps> = ({ data }) => {
 			<Paper sx={sharedClasses.paper}>
 				<Typography variant="h5">{name}</Typography>
 				<Typography>Length: {length}m</Typography>
-				<Typography>Pilots: {pilots.length}</Typography>
+				<Typography>Pilots: {pilots?.length}</Typography>
 				<Typography>Cost: {cost_in_credits}</Typography>
 			</Paper>
 		</Link>
