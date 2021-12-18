@@ -20,6 +20,7 @@ import Planet from "./Planets/Planet";
 import Specie from "./Species/Spicie";
 import Starship from "./Starships/Starship";
 import Vehicle from "./Vehicles/Vehicle";
+import { getNeedData } from "../App";
 
 interface UniversalViewProps {
 	searchValue: string;
@@ -34,32 +35,27 @@ const UniversalView: React.FC<UniversalViewProps> = ({
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		if (!state.length) {
-			(async () => {
-				const items = await getAllItems(category);
-				switch (category) {
-					case "people":
-						dispatch(setPeople(items));
-						break;
-					case "films":
-						dispatch(setFilms(items));
-						break;
-					case "planets":
-						dispatch(setPlanets(items));
-						break;
-					case "species":
-						dispatch(setSpecies(items));
-						break;
-					case "starships":
-						dispatch(setStarships(items));
-						break;
-					case "vehicles":
-						dispatch(setVehicles(items));
-						break;
-					default:
-						break;
-				}
-			})();
+		switch (category) {
+			case "people":
+				getNeedData(state, category, dispatch, setPeople);
+				break;
+			case "films":
+				getNeedData(state, category, dispatch, setFilms);
+				break;
+			case "planets":
+				getNeedData(state, category, dispatch, setPlanets);
+				break;
+			case "starships":
+				getNeedData(state, category, dispatch, setStarships);
+				break;
+			case "species":
+				getNeedData(state, category, dispatch, setSpecies);
+				break;
+			case "vehicles":
+				getNeedData(state, category, dispatch, setVehicles);
+				break;
+			default:
+				break;
 		}
 	}, [category, dispatch, state]);
 
