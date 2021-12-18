@@ -13,7 +13,6 @@ import {
 } from "../features/apiSlice";
 import { useEffect } from "react";
 import { RootState } from "../app/store";
-import { getAllItems } from "../api";
 import Person from "./People/Person";
 import Film from "./Films/Film";
 import Planet from "./Planets/Planet";
