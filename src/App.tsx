@@ -1,5 +1,6 @@
 import { ThemeProvider } from "@emotion/react";
 import { Box, createTheme, SxProps, Theme } from "@mui/material";
+import { ActionCreatorWithPayload } from "@reduxjs/toolkit";
 import { Route, Routes } from "react-router";
 import { Dispatch } from "redux";
 import { getAllItems } from "./api";
@@ -36,7 +37,7 @@ export const getNeedData = async (
 	stateArray: any[],
 	dataName: string,
 	dispatch: Dispatch,
-	setState: any
+	setState: ActionCreatorWithPayload<any>
 ) => {
 	if (!stateArray.length) {
 		(async () => {
