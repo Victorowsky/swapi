@@ -1,8 +1,7 @@
-import { Box } from "@mui/material";
+import { Box, SxProps, Theme } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 
 import Skeletons from "./Skeletons";
-import { sharedClasses } from "./sharedClasses";
 import {
 	setFilms,
 	setPeople,
@@ -25,6 +24,16 @@ interface UniversalViewProps {
 	searchValue: string;
 	state: any[];
 }
+
+const classes: SxProps<Theme> = {
+	view: {
+		display: "flex",
+		width: "100%",
+		gap: "15px",
+		flexWrap: "wrap",
+		justifyContent: "center",
+	},
+};
 
 const UniversalView: React.FC<UniversalViewProps> = ({
 	searchValue,
@@ -60,7 +69,7 @@ const UniversalView: React.FC<UniversalViewProps> = ({
 
 	if (!state.length) {
 		return (
-			<Box sx={sharedClasses.view}>
+			<Box sx={classes.view}>
 				<Skeletons amount={12} />
 			</Box>
 		);
@@ -102,7 +111,7 @@ const UniversalView: React.FC<UniversalViewProps> = ({
 		return jsxElement;
 	});
 
-	return <Box sx={sharedClasses.view}>{renderItems}</Box>;
+	return <Box sx={classes.view}>{renderItems}</Box>;
 };
 
 export default UniversalView;

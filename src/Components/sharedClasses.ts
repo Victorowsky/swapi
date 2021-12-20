@@ -5,13 +5,6 @@ export const sharedClasses:
 	| React.CSSProperties
 	| undefined
 	| any = {
-	view: {
-		display: "flex",
-		width: "100%",
-		gap: "15px",
-		flexWrap: "wrap",
-		justifyContent: "center",
-	},
 	link: {
 		textDecoration: "none",
 		width: "98%",

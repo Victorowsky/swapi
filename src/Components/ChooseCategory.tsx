@@ -12,7 +12,6 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../app/store";
 import { changeCategory } from "../features/apiSlice";
-
 const classes: SxProps<Theme> = {
 	box: {
 		display: "flex",
