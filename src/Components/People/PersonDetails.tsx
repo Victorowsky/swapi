@@ -150,6 +150,7 @@ const PersonDetails: React.FC<PersonDetailsProps> = () => {
 					Homeworld:
 					<Link style={detailsClasses.link} to={`/planet/${findHomeworld}`}>
 						<Box component="span" sx={detailsClasses.typographyLink}>
+							{" "}
 							{findHomeworld}
 						</Box>
 					</Link>
